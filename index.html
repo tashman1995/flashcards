@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="heading-primary">
+        Flash Cards
+    </h1>
+
+    <a href="#" class="popup-button" id="open-popup">
+        <svg class="popup-button__icon">
+            <use xlink:href="img/sprite.svg#icon-circle-with-plus"></use>
+        </svg>
+    </a>
+
+    
+
+    <div class="container">
+            
+        <div class="cards" id="cards">
+           
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup__content">
+            <form id="newCardForm">
+                <div class="popup__close">
+                    <a href="#" id="exit-popup" class="popup__cross">
+                        <svg class="popup__close-icon">
+                            <use xlink:href="img/sprite.svg#icon-cross"></use>
+                        </svg>
+                    </a>
+                </div>
+                <h1 class="heading-primary" id="popup-title">
+                    Add New Card
+                </h1>
+                <div class="popup__form-control">
+                    <label for="question" class="heading-secondary heading-secondary__popup">
+                        Question
+                    </label>
+                    <textarea name="question" id="question" cols="35" rows="3" class="popup__txt " placeholder="Write the question here..."></textarea>
+                    <small class="popup__error">Error Message</small>
+                </div>
+
+                <div class="popup__form-control">
+                    <label for="answer" class="heading-secondary heading-secondary__popup">
+                        Answer
+                    </label>
+                    <textarea name="answer" id="answer" cols="35" rows="7" class="popup__txt popup__text--error" placeholder="Write the answer here..."></textarea>
+                    <small class="popup__error">Error Message</small>
+                </div>
+                
+                <button type="submit" class="btn btn__save" id="save">
+                    Save
+                </button>
+                
+            </form>
+            
+        </div>
+    </div>
+
+    <script src="app-shortv.js"></script>
+</body>
+</html>

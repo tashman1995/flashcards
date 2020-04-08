@@ -1,0 +1,491 @@
+
+$color-primary: #4796f0;
+$color-primary-light:  rgb(44, 149, 235);
+$color-primary-light-2:  rgb(110, 178, 233);
+$color-primary-dark: rgb(42, 73, 207);
+
+$color-grey-light-1: #faf9f9;
+$color-grey-light-2: #f4f2f2;
+$color-grey-light-3: #f0eeee;
+$color-grey-light-4: #ccc;
+$color-grey-dark-1: #333;
+$color-grey-dark-2: #777;
+$color-grey-dark-3: #999;
+$error-color: #ff5050;
+$color-white: #fff;
+$color-black: #000;
+
+$shadow-dark: 0 2rem 4rem rgba(0, 0, 0, .3);
+$shadow-small: 0 1rem 2rem rgba(0, 0, 0, .2);
+$shadow-medium: 0 1.5rem 3rem rgba(0, 0, 0, .3);
+
+$border-radius: .3rem;
+
+@mixin center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+}
+
+@mixin respond($breakpoint) {
+	@if $breakpoint == one {
+		@media only screen and (max-width: 28.75em) { //360px not divided by 16 like the others
+			@content 
+		};
+	}
+
+	@if $breakpoint == two {
+		@media only screen and (max-width: 43.75em) { //600px
+			@content 
+		};
+	}
+
+	@if $breakpoint == three {
+		@media only screen and (max-width: 64em) { //900px / 16
+			@content 
+		};
+	}
+
+	@if $breakpoint == four {
+		@media only screen and (max-width: 84em) { //900px / 16
+			@content 
+		};
+	}
+
+}
+
+// @include respond(four) {
+//     font-size: 56.25%; //1 rem = 9px, 9/16 = 56.25%
+// }
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+
+*,
+::after,
+::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem is 10px
+}
+
+body {
+    font-family: 'Open sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+    background-repeat: no-repeat;
+    color: $color-grey-dark-1;
+    min-height: 100vh;
+   
+  
+}
+
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0rem auto 8rem auto;
+    // background-color: $color-primary;
+    border-radius: $border-radius;
+    padding: 0 3rem 3rem 3rem;
+    // box-shadow: $shadow-dark;
+    max-width: 118rem;
+
+    @include respond(four) {
+        width: 90rem;
+    }
+
+    @include respond(three) {
+        width: 62rem;
+    }
+   
+    @include respond(two) {
+        width: 32rem;
+    }
+
+    @include respond(one) {
+        padding: 1rem;
+    }
+}
+
+.new-card {
+    background-color: $color-white;
+    border-radius: $border-radius;
+    padding: 3rem;
+    margin-bottom: 3rem;
+    box-shadow: $shadow-small;
+   
+}
+
+
+.cards {
+    
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: center;
+    @include respond(two) {
+        justify-content: center;
+        align-items: center;
+    }
+    
+}
+
+.card {
+    margin: 0 1.5rem 1.5rem 1.5rem;
+   
+
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+    }
+
+    
+
+    &__content {
+        perspective: 150rem;
+        -moz-perspective: 150rem;
+        position: relative;
+        width: 25rem;
+        height: 23rem;
+        transition: all .2s;
+
+        &:hover {
+            transform: scale(1.05) translateY(-1rem);
+            
+        }
+        
+    }
+
+    &__side {
+        cursor: pointer;
+        background-color: $color-white;
+        color:$color-grey-dark-1;
+        width: 25rem;
+        height: 23rem;
+        padding: 2rem 3rem;
+        box-shadow: $shadow-small;
+        
+        border-radius: $border-radius;
+        transition: all .5s;
+
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		border-radius: $border-radius;
+        overflow: hidden;
+        // transform: rotateY(-180deg);
+
+        &:hover {
+            box-shadow: $shadow-medium;
+        
+        }
+        
+        &--back {
+            transform: rotateY(180deg);
+
+        }
+
+        &--front {
+            display: flex;
+            flex-direction: column;
+        }
+
+    }
+
+
+    &__answer {
+        font-size: 1.4rem;
+    }
+
+    &__icon {
+        cursor: pointer;
+        border: none;
+        height: 2.5rem;
+        width: 2.5rem;
+        background: none;
+        fill:$color-grey-dark-1;
+        margin-left: .7rem;
+        transition: all .1s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__side-label {
+        margin-right: auto;
+        text-transform: uppercase;
+        letter-spacing: .2rem;
+        font-size: 1.3rem;
+
+        &--back {
+            margin-bottom: .5rem;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        margin-bottom: .5rem;
+        align-items: center;
+    }
+}
+
+.front-hidden {
+    transform: rotateY(-180deg);
+}
+
+.back-showing {
+    transform: rotateY(0deg);
+}
+
+
+.heading-primary {
+    padding: 4rem 0;
+    font-size: 4rem;
+    width: 100%;
+    text-align: center;
+    color: $color-white;
+    line-height: 1;
+    
+
+    &-dark {
+        color: $color-grey-dark-1;
+    }
+
+    @include respond(one) {
+        font-size: 3rem;
+    }
+}
+
+
+.heading-secondary {
+    font-weight: 700;
+    hyphens: auto;
+
+    &__popup {
+        color: $color-white;
+    }
+}
+
+.popup-button {
+    &:link, &:visited {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position:fixed;
+        background-color: $color-white;
+        top: 4rem;
+        right: 8rem;
+        box-shadow: $shadow-small;
+        transition: all .2s;
+        color: $color-white;
+        text-decoration: none;
+        line-height: .9;
+
+        @include respond(four) {
+          
+            right: 6rem;
+        }
+        @include respond(three) {
+            right: 4rem;
+        }
+        @include respond(two) {
+            top: 3.5rem;
+        }
+        @include respond(one) {
+            top: 4rem;
+            right: 5rem;
+        }
+    }
+
+    
+    &:hover {
+        transform: scale(1.02) translateY(-2px);
+        box-shadow: $shadow-medium;
+    }       
+    
+
+    &:focus {
+        transform: scale(1) translateY(0px);
+            box-shadow: $shadow-medium;
+    }
+
+    &__icon {
+        fill: $color-primary;
+        height: 6rem;
+        width: 6rem;
+
+        @include respond(three) {
+            height: 5rem;
+            width: 5rem;
+        }
+
+        @include respond(one) {
+            height: 3rem;
+            width: 3rem;
+        }
+    }
+
+}
+    
+.popup {
+    display: none;
+    position: fixed;
+    font-size: 2rem;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    z-index: 3000;
+    background-color: rgba($color: $color-black, $alpha: .8);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+
+    &__content {
+        @include center;
+        width: 40%;
+        background-color: $color-primary;
+        box-shadow: 0 2rem 4rem rgba($color: $color-black, $alpha: .5);
+        border-radius: $border-radius;
+        overflow: hidden;
+        padding: 1rem 6rem 6rem 6rem;
+        transition: all .4s .2s;
+
+        @include respond(four) {
+            width: 50%;
+        }
+        @include respond(three) {
+            width: 65%;
+            padding: 1rem 5rem 5rem 5rem;
+        }
+        @include respond(two) {
+            width: 80%;
+            padding: 1rem 3rem 4rem 3rem;
+        }
+        @include respond(one) {
+            width: 90%;
+            padding: 1rem 1rem 3rem 1rem;
+        }
+    }
+
+    &__form-control {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    &__txt {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;	
+        width: 100%;
+        padding: 2rem;
+        resize: none;
+        border: none;
+        border-radius: $border-radius;
+        font-family: inherit;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 .5rem .5rem rgba($color: $color-black, $alpha: .2);
+        // border-left: .5rem solid white;
+        border: 3px solid white;
+        transition: all .2s;
+
+        &:focus {
+            border: 3px solid $color-primary-light-2;
+            transform: translateY(-2px);
+            box-shadow: 0 .8rem .8rem rgba($color: $color-black, $alpha: .4);
+            outline: none;
+        }
+
+        &--success {
+            border: 3px solid #a2ff9f !important;
+        }
+
+        &--failure {
+            border: 3px solid #fb9191 !important;
+        }
+        
+    }
+
+    &__error {
+        position: absolute;
+        left: 0;
+        bottom: -.5rem;
+	    visibility: hidden;
+    }
+
+    &__close {
+
+        position: absolute;
+        right: 3rem;
+        top: 2.5rem;
+
+        &-icon {
+            fill: $color-white;
+            height: 3rem;
+            width: 3rem;
+        
+            transition: all .2s;
+    
+            &:hover {
+                // font-size: 4rem;
+                transform: scale(1.2);
+            }
+        }
+    }
+
+}
+
+.btn {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 0 .5rem .5rem rgba($color: $color-black, $alpha: .2);
+    
+    border-radius: 100px;
+    
+   
+    &__save {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: .2rem;
+        display: block;
+        margin: 0 auto;
+        padding: 1.5rem 3rem;
+        color: $color-primary;
+        background: $color-white;
+        margin-top: 2rem;
+        transition: all .1s;
+
+        &:hover {
+            transform: scale(1.05) translateY(-.3rem);
+            box-shadow: 0 .8rem .8rem rgba($color: $color-black, $alpha: .2);
+        }
+
+        &:active {
+            transform: scale(1.05) translateY(0rem);
+            box-shadow: 0 .5rem .5rem rgba($color: $color-black, $alpha: .2);
+        }
+    }
+}
+
+
+
