@@ -1,2 +1,2 @@
 #FlashCardApp
-This is the flashcard app
+This a the flashcard app
